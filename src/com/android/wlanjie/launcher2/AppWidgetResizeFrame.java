@@ -77,7 +77,6 @@ public class AppWidgetResizeFrame extends FrameLayout {
             LauncherAppWidgetHostView widgetView, CellLayout cellLayout, DragLayer dragLayer) {
 
         super(context);
-        System.out.println("AppWidgetResizeFrame AppWidgetResizeFrame");
         mLauncher = (Launcher) context;
         mCellLayout = cellLayout;
         mWidgetView = widgetView;
@@ -144,7 +143,6 @@ public class AppWidgetResizeFrame extends FrameLayout {
     }
 
     public boolean beginResizeIfPointInRegion(int x, int y) {
-        System.out.println("AppWidgetResizeFrame beginResizeIfPointInRegion");
         boolean horizontalActive = (mResizeMode & AppWidgetProviderInfo.RESIZE_HORIZONTAL) != 0;
         boolean verticalActive = (mResizeMode & AppWidgetProviderInfo.RESIZE_VERTICAL) != 0;
 
@@ -176,7 +174,6 @@ public class AppWidgetResizeFrame extends FrameLayout {
      *  of the CellLayout, and such that the frame's borders can't cross.
      */
     public void updateDeltas(int deltaX, int deltaY) {
-        System.out.println("AppWidgetResizeFrame updateDeltas");
         if (mLeftBorderActive) {
             mDeltaX = Math.max(-mBaselineX, deltaX); 
             mDeltaX = Math.min(mBaselineWidth - 2 * mTouchTargetWidth, mDeltaX);
@@ -195,7 +192,6 @@ public class AppWidgetResizeFrame extends FrameLayout {
     }
 
     public void visualizeResizeForDelta(int deltaX, int deltaY) {
-        System.out.println("AppWidgetResizeFrame visualizeResizeForDelta");
         visualizeResizeForDelta(deltaX, deltaY, false);
     }
 
@@ -203,7 +199,6 @@ public class AppWidgetResizeFrame extends FrameLayout {
      *  Based on the deltas, we resize the frame, and, if needed, we resize the widget.
      */
     private void visualizeResizeForDelta(int deltaX, int deltaY, boolean onDismiss) {
-        System.out.println("AppWidgetResizeFrame visualizeResizeForDelta");
         updateDeltas(deltaX, deltaY);
         DragLayer.LayoutParams lp = (DragLayer.LayoutParams) getLayoutParams();
 
@@ -229,7 +224,6 @@ public class AppWidgetResizeFrame extends FrameLayout {
      *  Based on the current deltas, we determine if and how to resize the widget.
      */
     private void resizeWidgetIfNeeded(boolean onDismiss) {
-        System.out.println("AppWidgetResizeFrame resizeWidgetIfNeeded");
         int xThreshold = mCellLayout.getCellWidth() + mCellLayout.getWidthGap();
         int yThreshold = mCellLayout.getCellHeight() + mCellLayout.getHeightGap();
 
@@ -344,14 +338,12 @@ public class AppWidgetResizeFrame extends FrameLayout {
 
     static void updateWidgetSizeRanges(AppWidgetHostView widgetView, Launcher launcher,
             int spanX, int spanY) {
-        System.out.println("AppWidgetResizeFrame updateWidgetSizeRanges");
         getWidgetSizeRanges(launcher, spanX, spanY, mTmpRect);
         widgetView.updateAppWidgetSize(null, mTmpRect.left, mTmpRect.top,
                 mTmpRect.right, mTmpRect.bottom);
     }
 
     static Rect getWidgetSizeRanges(Launcher launcher, int spanX, int spanY, Rect rect) {
-        System.out.println("AppWidgetResizeFrame getWidgetSizeRanges");
         if (rect == null) {
             rect = new Rect();
         }
@@ -383,13 +375,11 @@ public class AppWidgetResizeFrame extends FrameLayout {
      * to LauncherModel and animate the resize frame.
      */
     public void commitResize() {
-        System.out.println("AppWidgetResizeFrame commitResize");
         resizeWidgetIfNeeded(true);
         requestLayout();
     }
 
     public void onTouchUp() {
-        System.out.println("AppWidgetResizeFrame onTouchUp");
         int xThreshold = mCellLayout.getCellWidth() + mCellLayout.getWidthGap();
         int yThreshold = mCellLayout.getCellHeight() + mCellLayout.getHeightGap();
 
@@ -407,7 +397,6 @@ public class AppWidgetResizeFrame extends FrameLayout {
     }
 
     public void snapToWidget(boolean animate) {
-        System.out.println("AppWidgetResizeFrame snapToWidget");
         final DragLayer.LayoutParams lp = (DragLayer.LayoutParams) getLayoutParams();
         int xOffset = mCellLayout.getLeft() + mCellLayout.getPaddingLeft()
                 + mDragLayer.getPaddingLeft() - mWorkspace.getScrollX();

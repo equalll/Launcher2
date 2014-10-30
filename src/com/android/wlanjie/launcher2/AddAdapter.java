@@ -75,7 +75,6 @@ public class AddAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        System.out.println("AddAdapter getView");
         ListItem item = (ListItem) getItem(position);
 
         if (convertView == null) {

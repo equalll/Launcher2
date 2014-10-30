@@ -39,14 +39,12 @@ public class AccessibleTabView extends TextView {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        System.out.println("AccessibleTabView onKeyDown");
         return FocusHelper.handleTabKeyEvent(this, keyCode, event)
                 || super.onKeyDown(keyCode, event);
     }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        System.out.println("AccessibleTabView onKeyUp");
         return FocusHelper.handleTabKeyEvent(this, keyCode, event)
                 || super.onKeyUp(keyCode, event);
     }

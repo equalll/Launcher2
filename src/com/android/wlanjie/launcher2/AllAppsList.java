@@ -60,7 +60,6 @@ class AllAppsList {
      * If the app is already in the list, doesn't add it.
      */
     public void add(ApplicationInfo info) {
-        System.out.println("AllAppsList add");
         if (findActivity(data, info.componentName)) {
             return;
         }
@@ -69,7 +68,6 @@ class AllAppsList {
     }
     
     public void clear() {
-        System.out.println("AllAppsList clear");
         data.clear();
         // TODO: do we clear these too?
         added.clear();
@@ -78,12 +76,10 @@ class AllAppsList {
     }
 
     public int size() {
-        System.out.println("AllAppsList size");
         return data.size();
     }
 
     public ApplicationInfo get(int index) {
-        System.out.println("AllAppsList get");
         return data.get(index);
     }
 
@@ -91,7 +87,6 @@ class AllAppsList {
      * Add the icons for the supplied apk called packageName.
      */
     public void addPackage(Context context, String packageName) {
-        System.out.println("AllAppsList addPackage");
         final List<ResolveInfo> matches = findActivitiesForPackage(context, packageName);
 
         if (matches.size() > 0) {
@@ -105,7 +100,6 @@ class AllAppsList {
      * Remove the apps for the given apk identified by packageName.
      */
     public void removePackage(String packageName) {
-        System.out.println("AllAppsList removePackage");
         final List<ApplicationInfo> data = this.data;
         for (int i = data.size() - 1; i >= 0; i--) {
             ApplicationInfo info = data.get(i);
@@ -123,7 +117,6 @@ class AllAppsList {
      * Add and remove icons for this package which has been updated.
      */
     public void updatePackage(Context context, String packageName) {
-        System.out.println("AllAppsList updatePackage");
         final List<ResolveInfo> matches = findActivitiesForPackage(context, packageName);
         if (matches.size() > 0) {
             // Find disabled/removed activities and remove them from data and add them
@@ -174,7 +167,6 @@ class AllAppsList {
      * Query the package manager for MAIN/LAUNCHER activities in the supplied package.
      */
     private static List<ResolveInfo> findActivitiesForPackage(Context context, String packageName) {
-        System.out.println("AllAppsList findActivitiesForPackage");
         final PackageManager packageManager = context.getPackageManager();
 
         final Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
@@ -189,7 +181,6 @@ class AllAppsList {
      * Returns whether <em>apps</em> contains <em>component</em>.
      */
     private static boolean findActivity(List<ResolveInfo> apps, ComponentName component) {
-        System.out.println("AllAppsList findActivity");
         final String className = component.getClassName();
         for (ResolveInfo info : apps) {
             final ActivityInfo activityInfo = info.activityInfo;
@@ -204,7 +195,6 @@ class AllAppsList {
      * Returns whether <em>apps</em> contains <em>component</em>.
      */
     private static boolean findActivity(ArrayList<ApplicationInfo> apps, ComponentName component) {
-        System.out.println("AllAppsList findActivity");
         final int N = apps.size();
         for (int i=0; i<N; i++) {
             final ApplicationInfo info = apps.get(i);
@@ -219,7 +209,6 @@ class AllAppsList {
      * Find an ApplicationInfo object for the given packageName and className.
      */
     private ApplicationInfo findApplicationInfoLocked(String packageName, String className) {
-        System.out.println("AllAppsList findApplicationInfoLocked");
         for (ApplicationInfo info: data) {
             final ComponentName component = info.intent.getComponent();
             if (packageName.equals(component.getPackageName())

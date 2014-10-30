@@ -78,7 +78,6 @@ public class Cling extends FrameLayout {
 
     public Cling(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        System.out.println("Cling init");
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Cling, defStyle, 0);
         mDrawIdentifier = a.getString(R.styleable.Cling_drawIdentifier);
@@ -118,12 +117,10 @@ public class Cling extends FrameLayout {
     }
 
     public String getDrawIdentifier() {
-       System.out.println("Cling getDrawIdentifier");
         return mDrawIdentifier;
     }
 
     private int[] getPunchThroughPositions() {
-        System.out.println("Cling getPunchThroughPositions");
         if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT)) {
             return new int[]{getMeasuredWidth() / 2, getMeasuredHeight() - (mButtonBarHeight / 2)};
         } else if (mDrawIdentifier.equals(WORKSPACE_LANDSCAPE)) {
@@ -143,19 +140,16 @@ public class Cling extends FrameLayout {
 
     @Override
     public View focusSearch(int direction) {
-        System.out.println("Cling focusSearch");
         return this.focusSearch(this, direction);
     }
 
     @Override
     public View focusSearch(View focused, int direction) {
-        System.out.println("Cling focusSearchh");
         return FocusFinder.getInstance().findNextFocus(this, focused, direction);
     }
 
     @Override
     public boolean onHoverEvent(MotionEvent event) {
-        System.out.println("Cling onHoverEvent");
         return (mDrawIdentifier.equals(WORKSPACE_PORTRAIT)
                 || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE)
                 || mDrawIdentifier.equals(WORKSPACE_LARGE)
@@ -167,7 +161,6 @@ public class Cling extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(android.view.MotionEvent event) {
-        System.out.println("Cling onTouchEvent");
         if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) ||
             mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) ||
             mDrawIdentifier.equals(WORKSPACE_LARGE) ||
@@ -200,7 +193,6 @@ public class Cling extends FrameLayout {
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
-        System.out.println("Cling dispatchDraw");
         if (mIsInitialized) {
             DisplayMetrics metrics = new DisplayMetrics();
             mLauncher.getWindowManager().getDefaultDisplay().getMetrics(metrics);

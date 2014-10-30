@@ -60,7 +60,6 @@ public class DeleteDropTarget extends ButtonDropTarget {
 
     @Override
     protected void onFinishInflate() {
-        System.out.println("DeleteDropTarget onFinishInflate");
         super.onFinishInflate();
 
         // Get the drawable
@@ -90,11 +89,9 @@ public class DeleteDropTarget extends ButtonDropTarget {
     }
 
     private boolean isAllAppsApplication(DragSource source, Object info) {
-        System.out.println("DeleteDropTarget isAllAppsApplication");
         return (source instanceof AppsCustomizePagedView) && (info instanceof ApplicationInfo);
     }
     private boolean isAllAppsWidget(DragSource source, Object info) {
-        System.out.println("DeleteDropTarget isAllAppsWidget");
         if (source instanceof AppsCustomizePagedView) {
             if (info instanceof PendingAddItemInfo) {
                 PendingAddItemInfo addInfo = (PendingAddItemInfo) info;
@@ -108,43 +105,35 @@ public class DeleteDropTarget extends ButtonDropTarget {
         return false;
     }
     private boolean isDragSourceWorkspaceOrFolder(DragObject d) {
-        System.out.println("DeleteDropTarget isDragSourceWorkspaceOrFoldert");
         return (d.dragSource instanceof Workspace) || (d.dragSource instanceof Folder);
     }
     private boolean isWorkspaceOrFolderApplication(DragObject d) {
-        System.out.println("DeleteDropTarget isWorkspaceOrFolderApplication");
         return isDragSourceWorkspaceOrFolder(d) && (d.dragInfo instanceof ShortcutInfo);
     }
     private boolean isWorkspaceOrFolderWidget(DragObject d) {
-        System.out.println("DeleteDropTarget isWorkspaceOrFolderWidget");
         return isDragSourceWorkspaceOrFolder(d) && (d.dragInfo instanceof LauncherAppWidgetInfo);
     }
     private boolean isWorkspaceFolder(DragObject d) {
-        System.out.println("DeleteDropTarget isWorkspaceFolder");
         return (d.dragSource instanceof Workspace) && (d.dragInfo instanceof FolderInfo);
     }
 
     private void setHoverColor() {
-        System.out.println("DeleteDropTarget setHoverColor");
         mCurrentDrawable.startTransition(mTransitionDuration);
         setTextColor(mHoverColor);
     }
     private void resetHoverColor() {
-        System.out.println("DeleteDropTarget resetHoverColor");
         mCurrentDrawable.resetTransition();
         setTextColor(mOriginalTextColor);
     }
 
     @Override
     public boolean acceptDrop(DragObject d) {
-        System.out.println("DeleteDropTarget acceptDrop");
         // We can remove everything including App shortcuts, folders, widgets, etc.
         return true;
     }
 
     @Override
     public void onDragStart(DragSource source, Object info, int dragAction) {
-        System.out.println("DeleteDropTarget onDragStart");
         boolean isVisible = true;
         boolean isUninstall = false;
 
@@ -182,13 +171,11 @@ public class DeleteDropTarget extends ButtonDropTarget {
 
     @Override
     public void onDragEnd() {
-        System.out.println("DeleteDropTarget onDragEnd");
         super.onDragEnd();
         mActive = false;
     }
 
     public void onDragEnter(DragObject d) {
-        System.out.println("DeleteDropTarget onDragEnter");
         super.onDragEnter(d);
 
         setHoverColor();
@@ -196,7 +183,6 @@ public class DeleteDropTarget extends ButtonDropTarget {
 
     public void onDragExit(DragObject d) {
         super.onDragExit(d);
-        System.out.println("DeleteDropTarget onDragExit");
 
         if (!d.dragComplete) {
             resetHoverColor();
@@ -207,7 +193,6 @@ public class DeleteDropTarget extends ButtonDropTarget {
     }
 
     private void animateToTrashAndCompleteDrop(final DragObject d) {
-        System.out.println("DeleteDropTarget animateToTrashAndCompleteDrop");
         DragLayer dragLayer = mLauncher.getDragLayer();
         Rect from = new Rect();
         dragLayer.getViewRectRelativeToSelf(d.dragView, from);
@@ -231,7 +216,6 @@ public class DeleteDropTarget extends ButtonDropTarget {
     }
 
     private void completeDrop(DragObject d) {
-        System.out.println("DeleteDropTarget completeDrop");
         ItemInfo item = (ItemInfo) d.dragInfo;
 
         if (isAllAppsApplication(d.dragSource, item)) {
@@ -264,7 +248,6 @@ public class DeleteDropTarget extends ButtonDropTarget {
     }
 
     public void onDrop(DragObject d) {
-        System.out.println("DeleteDropTarget onDrop");
         animateToTrashAndCompleteDrop(d);
     }
 
@@ -300,7 +283,6 @@ public class DeleteDropTarget extends ButtonDropTarget {
         return new AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                System.out.println("DeleteDropTarget AnimatorUpdateListener onAnimationUpdate");
                 final DragView dragView = (DragView) dragLayer.getAnimatedView();
                 float t = ((Float) animation.getAnimatedValue()).floatValue();
                 float tp = scaleAlphaInterpolator.getInterpolation(t);
@@ -349,7 +331,6 @@ public class DeleteDropTarget extends ButtonDropTarget {
 
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
-            System.out.println("DeleteDropTarget FlingAlongVectorAnimatorUpdateListener onAnimationUpdate");
             final DragView dragView = (DragView) mDragLayer.getAnimatedView();
             float t = ((Float) animation.getAnimatedValue()).floatValue();
             long curTime = AnimationUtils.currentAnimationTimeMillis();
@@ -379,7 +360,6 @@ public class DeleteDropTarget extends ButtonDropTarget {
     private AnimatorUpdateListener createFlingAlongVectorAnimatorListener(final DragLayer dragLayer,
             DragObject d, PointF vel, final long startTime, final int duration,
             ViewConfiguration config) {
-        System.out.println("DeleteDropTarget FlingAlongVectorAnimatorUpdateListener createFlingAlongVectorAnimatorListenere");
         final Rect from = new Rect();
         dragLayer.getViewRectRelativeToSelf(d.dragView, from);
 
@@ -389,7 +369,6 @@ public class DeleteDropTarget extends ButtonDropTarget {
 
     public void onFlingToDelete(final DragObject d, int x, int y, PointF vel) {
         final boolean isAllApps = d.dragSource instanceof AppsCustomizePagedView;
-        System.out.println("DeleteDropTarget FlingAlongVectorAnimatorUpdateListener onFlingToDelete");
         // Don't highlight the icon as it's animating
         d.dragView.setColor(0);
         d.dragView.updateInitialScaleToCurrentScale();

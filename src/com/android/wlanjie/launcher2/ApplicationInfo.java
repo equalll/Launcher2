@@ -64,7 +64,6 @@ class ApplicationInfo extends ItemInfo {
      */
     public ApplicationInfo(PackageManager pm, ResolveInfo info, IconCache iconCache,
             HashMap<Object, CharSequence> labelCache) {
-        System.out.println("ApplicationInfo ApplicationInfo");
         final String packageName = info.activityInfo.applicationInfo.packageName;
 
         this.componentName = new ComponentName(packageName, info.activityInfo.name);
@@ -96,7 +95,6 @@ class ApplicationInfo extends ItemInfo {
         intent = new Intent(info.intent);
         flags = info.flags;
         firstInstallTime = info.firstInstallTime;
-        System.out.println("ApplicationInfo ApplicationInfo");
     }
 
     /**
@@ -107,7 +105,6 @@ class ApplicationInfo extends ItemInfo {
      * @param launchFlags the launch flags
      */
     final void setActivity(ComponentName className, int launchFlags) {
-        System.out.println("ApplicationInfo setActivity");
         intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         intent.setComponent(className);
@@ -122,7 +119,6 @@ class ApplicationInfo extends ItemInfo {
 
     public static void dumpApplicationInfoList(String tag, String label,
             ArrayList<ApplicationInfo> list) {
-        System.out.println("ApplicationInfo dumpApplicationInfoList");
         Log.d(tag, label + " size=" + list.size());
         for (ApplicationInfo info: list) {
             Log.d(tag, "   title=\"" + info.title + "\" iconBitmap="
@@ -132,7 +128,6 @@ class ApplicationInfo extends ItemInfo {
     }
 
     public ShortcutInfo makeShortcut() {
-        System.out.println("ApplicationInfo makeShortcut");
         return new ShortcutInfo(this);
     }
 }

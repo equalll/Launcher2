@@ -38,7 +38,6 @@ public class DeferredHandler {
 
     private class Impl extends Handler implements MessageQueue.IdleHandler {
         public void handleMessage(Message msg) {
-            System.out.println("DeferredHandler handleMessage");
             Pair<Runnable, Integer> p;
             Runnable r;
             synchronized (mQueue) {
@@ -69,7 +68,6 @@ public class DeferredHandler {
 
         public void run() {
 
-            System.out.println("DeferredHandler run");
             mRunnable.run();
         }
     }
@@ -79,7 +77,6 @@ public class DeferredHandler {
 
     /** Schedule runnable to run after everything that's on the queue right now. */
     public void post(Runnable runnable) {
-        System.out.println("DeferredHandler post");
         post(runnable, 0);
     }
     public void post(Runnable runnable, int type) {
@@ -93,7 +90,6 @@ public class DeferredHandler {
 
     /** Schedule runnable to run when the queue goes idle. */
     public void postIdle(final Runnable runnable) {
-        System.out.println("DeferredHandler postIdlet");
 
         postIdle(runnable, 0);
     }
@@ -102,14 +98,12 @@ public class DeferredHandler {
     }
 
     public void cancelRunnable(Runnable runnable) {
-        System.out.println("DeferredHandler cancelRunnable");
 
         synchronized (mQueue) {
             while (mQueue.remove(runnable)) { }
         }
     }
     public void cancelAllRunnablesOfType(int type) {
-        System.out.println("DeferredHandler cancelAllRunnablesOfType");
 
         synchronized (mQueue) {
             ListIterator<Pair<Runnable, Integer>> iter = mQueue.listIterator();
@@ -124,7 +118,6 @@ public class DeferredHandler {
     }
 
     public void cancel() {
-        System.out.println("DeferredHandler cancel");
 
         synchronized (mQueue) {
             mQueue.clear();
@@ -133,7 +126,6 @@ public class DeferredHandler {
 
     /** Runs all queued Runnables from the calling thread. */
     public void flush() {
-        System.out.println("DeferredHandler flushl");
         LinkedList<Pair<Runnable, Integer>> queue = new LinkedList<Pair<Runnable, Integer>>();
         synchronized (mQueue) {
             queue.addAll(mQueue);
@@ -145,7 +137,6 @@ public class DeferredHandler {
     }
 
     void scheduleNextLocked() {
-        System.out.println("DeferredHandler scheduleNextLocked");
         if (mQueue.size() > 0) {
             Pair<Runnable, Integer> p = mQueue.getFirst();
             Runnable peek = p.first;

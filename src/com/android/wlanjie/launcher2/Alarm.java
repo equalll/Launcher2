@@ -35,14 +35,12 @@ public class Alarm implements Runnable{
     }
 
     public void setOnAlarmListener(OnAlarmListener alarmListener) {
-        System.out.println("Alarm setOnAlarmListener");
         mAlarmListener = alarmListener;
     }
 
     // Sets the alarm to go off in a certain number of milliseconds. If the alarm is already set,
     // it's overwritten and only the new alarm setting is used
     public void setAlarm(long millisecondsInFuture) {
-        System.out.println("Alarm setAlarm");
         long currentTime = System.currentTimeMillis();
         mAlarmPending = true;
         mAlarmTriggerTime = currentTime + millisecondsInFuture;
@@ -53,14 +51,12 @@ public class Alarm implements Runnable{
     }
 
     public void cancelAlarm() {
-        System.out.println("Alarm cancelAlarm");
         mAlarmTriggerTime = 0;
         mAlarmPending = false;
     }
 
     // this is called when our timer runs out
     public void run() {
-        System.out.println("Alarm run");
         mWaitingForCallback = false;
         if (mAlarmTriggerTime != 0) {
             long currentTime = System.currentTimeMillis();
@@ -79,7 +75,6 @@ public class Alarm implements Runnable{
     }
 
     public boolean alarmPending() {
-        System.out.println("Alarm alarmPending");
         return mAlarmPending;
     }
 }

@@ -52,29 +52,24 @@ public class ButtonDropTarget extends TextView implements DropTarget, DragContro
 
     public ButtonDropTarget(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        System.out.println("ButtonDropTarget ButtonDropTarget");
         Resources r = getResources();
         mTransitionDuration = r.getInteger(R.integer.config_dropTargetBgTransitionDuration);
         mBottomDragPadding = r.getDimensionPixelSize(R.dimen.drop_target_drag_padding);
     }
 
     void setLauncher(Launcher launcher) {
-        System.out.println("ButtonDropTarget setLauncher");
         mLauncher = launcher;
     }
 
     public boolean acceptDrop(DragObject d) {
-        System.out.println("ButtonDropTarget acceptDrop");
         return false;
     }
 
     public void setSearchDropTargetBar(SearchDropTargetBar searchDropTargetBar) {
-        System.out.println("ButtonDropTarget setSearchDropTargetBar");
         mSearchDropTargetBar = searchDropTargetBar;
     }
 
     protected Drawable getCurrentDrawable() {
-        System.out.println("ButtonDropTarget getCurrentDrawable");
         Drawable[] drawables = getCompoundDrawablesRelative();
         for (int i = 0; i < drawables.length; ++i) {
             if (drawables[i] != null) {
@@ -85,58 +80,47 @@ public class ButtonDropTarget extends TextView implements DropTarget, DragContro
     }
 
     public void onDrop(DragObject d) {
-        System.out.println("ButtonDropTarget onDrop");
     }
 
     public void onFlingToDelete(DragObject d, int x, int y, PointF vec) {
         // Do nothing
-        System.out.println("ButtonDropTarget onFlingToDelete");
     }
 
     public void onDragEnter(DragObject d) {
-        System.out.println("ButtonDropTarget onDragEnter");
         d.dragView.setColor(mHoverColor);
     }
 
     public void onDragOver(DragObject d) {
         // Do nothing
-        System.out.println("ButtonDropTarget onDragOver");
     }
 
     public void onDragExit(DragObject d) {
         d.dragView.setColor(0);
-        System.out.println("ButtonDropTarget onDragExit");
     }
 
     public void onDragStart(DragSource source, Object info, int dragAction) {
         // Do nothing
-        System.out.println("ButtonDropTarget onDragStart");
     }
 
     public boolean isDropEnabled() {
-        System.out.println("ButtonDropTarget isDropEnabled");
         return mActive;
     }
 
     public void onDragEnd() {
         // Do nothing
-        System.out.println("ButtonDropTarget onDragEnd");
     }
 
     @Override
     public void getHitRect(android.graphics.Rect outRect) {
         super.getHitRect(outRect);
-        System.out.println("ButtonDropTarget getHitRect");
         outRect.bottom += mBottomDragPadding;
     }
 
     private boolean isRtl() {
-        System.out.println("ButtonDropTarget isRtl");
         return (getLayoutDirection() == View.LAYOUT_DIRECTION_RTL);
     }
 
     Rect getIconRect(int viewWidth, int viewHeight, int drawableWidth, int drawableHeight) {
-        System.out.println("ButtonDropTarget getIconRect");
         DragLayer dragLayer = mLauncher.getDragLayer();
 
         // Find the rect to animate to (the view is center aligned)
@@ -172,12 +156,10 @@ public class ButtonDropTarget extends TextView implements DropTarget, DragContro
 
     @Override
     public DropTarget getDropTargetDelegate(DragObject d) {
-        System.out.println("ButtonDropTarget getDropTargetDelegate");
         return null;
     }
 
     public void getLocationInDragLayer(int[] loc) {
-        System.out.println("ButtonDropTarget getLocationInDragLayer");
         mLauncher.getDragLayer().getLocationInDragLayer(this, loc);
     }
 }
